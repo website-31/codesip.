@@ -173,13 +173,26 @@
 </section>
 
 <section id="feedback">
-    <h2>Feedback Hub 💬</h2>
-    <div style="max-width:600px; margin:auto;">
-        <input type="text" id="fbName" placeholder="Name" style="width:100%; padding:10px; margin-bottom:10px; border-radius:8px; border:1px solid #ddd;">
-        <textarea id="fbText" placeholder="How's your experience?" style="width:100%; padding:10px; border-radius:8px; border:1px solid #ddd;"></textarea>
-        <button onclick="postFeedback()" style="width:100%; padding:12px; background:var(--primary); color:white; border:none; border-radius:8px; margin-top:10px; cursor:pointer; font-weight:bold;">Post Feedback</button>
-        <div id="fbList" style="margin-top:20px;"></div>
-    </div>
+    <h2>Community Feedback Hub 💬</h2>
+    <p style="text-align:center; color: #64748b; margin-bottom: 30px;">
+        Join the conversation! Log in with GitHub to leave feedback that everyone can see.
+    </p>
+
+    <script src="https://giscus.app/client.js"
+        data-repo="website-31/codesip-blog"
+        data-repo-id="[YOUR_REPO_ID]"
+        data-category="General"
+        data-category-id="[YOUR_CATEGORY_ID]"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+    </script>
 </section>
 
 <footer>
@@ -210,23 +223,7 @@
     codeInput.addEventListener('input', update);
     update();
 
-    // Feedback Logic
-    function postFeedback() {
-        const name = document.getElementById('fbName').value;
-        const text = document.getElementById('fbText').value;
-        if(!name || !text) return alert("Please fill fields!");
-        const fb = { name, text };
-        let list = JSON.parse(localStorage.getItem('cs_final_fb')) || [];
-        list.push(fb);
-        localStorage.setItem('cs_final_fb', JSON.stringify(list));
-        render();
-        document.getElementById('fbName').value = ""; document.getElementById('fbText').value = "";
-    }
-    function render() {
-        const list = JSON.parse(localStorage.getItem('cs_final_fb')) || [];
-        document.getElementById('fbList').innerHTML = list.map(f => `<div class="feedback-item"><strong>${f.name}:</strong> ${f.text}</div>`).reverse().join('');
-    }
-    render();
+    
 </script>
 
 </body>
